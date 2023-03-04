@@ -19,6 +19,12 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue'),
+  },
+
+  {
     path: '/403',
     name: '403',
     component: () => import('@/views/exception/403/index.vue'),
@@ -37,10 +43,22 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
+
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
   scrollBehavior: () => ({ left: 0, top: 0 }),
+})
+
+
+router.beforeEach((to, from, next) => {
+  const userinfo = localStorage.getItem('userinfo')
+  if (userinfo || to.name === 'login') {
+    next()
+  }
+  else {
+    next({name: 'login', query: {redirect: to.path}})
+  }
 })
 
 export async function setupRouter(app: App) {
