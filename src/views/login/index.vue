@@ -5,11 +5,11 @@ import { loginApi } from '@/api/login'
 import { router } from '@/router'
 export default defineComponent({
   setup() {
-    const login = async (account, password) => {
+    const login = async (account: string, password: string) => {
       console.log('!!! a= %s, b = %s', account, password)
       try {
         const res = await loginApi({ account, password })
-        // console.log('res:', res)
+        console.log('res:', res)
         localStorage.setItem('userinfo', account)
         router.push({path:'/'})
       } catch (error) {
