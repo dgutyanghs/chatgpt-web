@@ -1,4 +1,4 @@
-import { ss } from '@/utils/storage'
+import {ss} from '@/utils/storage'
 
 const LOCAL_NAME = 'userStorage'
 
@@ -15,16 +15,27 @@ export interface UserState {
 export function defaultSetting(): UserState {
   return {
     userInfo: {
-      avatar: 'https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg',
-      name: 'ChenZhaoYu',
-      description: 'Star on <a href="https://github.com/Chanzhaoyu/chatgpt-bot" class="text-blue-500" target="_blank" >Github</a>',
+      avatar: 'https://avatars.githubusercontent.com/u/7067401?v=4',
+      name: '大龄老猿',
+      description:
+          'Star on <a href="https://github.com/dgutyanghs/chatgpt-web" class="text-blue-500" target="_blank" >Github</a>',
     },
+    // userInfo: {
+    //   avatar:
+    //   'https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg',
+    //   name: 'ChenZhaoYu',
+    //   description: 'Star on <a
+    //   href="https://github.com/Chanzhaoyu/chatgpt-bot" class="text-blue-500"
+    //   target="_blank" >Github</a>',
+    // },
   }
 }
 
 export function getLocalState(): UserState {
-  const localSetting: UserState | undefined = ss.get(LOCAL_NAME)
-  return { ...defaultSetting(), ...localSetting }
+  const localSetting: UserState|undefined = ss.get(LOCAL_NAME)
+  return {
+    ...defaultSetting(), ...localSetting
+  }
 }
 
 export function setLocalState(setting: UserState): void {
